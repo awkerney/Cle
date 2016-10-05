@@ -9,8 +9,6 @@
 <header class="main-header post-head {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
     <div class="post-header">
       <div class="section">
-        <span>{{tags}}</span>
-
         <h1>{{title}}</h1>
 
         <section class="post-meta">
@@ -52,6 +50,7 @@
 
           {{/author}}
 
+        {{#if false}}
           <section class="share">
               <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}"
                   onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
@@ -92,7 +91,7 @@
                   +1
               </a>
           </section>
-
+         {{/if}}
           {{!-- Email subscribe form at the bottom of the sidebar --}}
           {{#if @labs.subscribers}}
           <section class="gh-subscribe">

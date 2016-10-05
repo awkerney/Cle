@@ -7,7 +7,11 @@
 {{#post}}
 
 {{!-- Post header --}}
-<header class="main-header post-head {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
+{{#has tag="#photo"}}
+    <header class="main-header post-head no-cover">
+{{else}}
+    <header class="main-header post-head {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
+{{/has}}
     <div class="post-header">
       <div class="section">
         <span>{{tags}}</span>
@@ -26,7 +30,12 @@
 
         {{!-- Post content --}}
         <section class="post-content column column--main">
-            {{content}}
+            {{#has tag="#photo"}}
+                <img src="{{image}}" />
+                {{content}}
+            {{else}}
+                {{content}}
+            {{/has}}
         </section>
 
         <aside class="post-sidebar column column--sidebar">
@@ -55,6 +64,7 @@
           {{/author}}
 
           {{!-- Social sharing --}}
+          {{#if false}}
           <section class="share">
               <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}"
                   onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
@@ -95,15 +105,16 @@
                   +1
               </a>
           </section>
+          {{/if}}
 
           {{!-- Email subscribe form at the bottom of the sidebar --}}
           {{#if @labs.subscribers}}
-          <section class="gh-subscribe">
-              <h3 class="gh-subscribe-title">Subscribe to {{@blog.title}}</h3>
-              <p>Get the latest posts delivered right to your inbox. Don't worry, we don't spam your inbox.</p>
-              {{subscribe_form placeholder="Your email address"}}
-              <span class="gh-subscribe-rss">or subscribe <a href="http://cloud.feedly.com/#subscription/feed/{{@blog.url}}/rss/">via RSS</a> with Feedly!</span>
-          </section>
+              <section class="gh-subscribe">
+                  <h3 class="gh-subscribe-title">Subscribe to {{@blog.title}}</h3>
+                  <p>Get the latest posts delivered right to your inbox. Don't worry, we don't spam your inbox.</p>
+                  {{subscribe_form placeholder="Your email address"}}
+                  <span class="gh-subscribe-rss">or subscribe <a href="http://cloud.feedly.com/#subscription/feed/{{@blog.url}}/rss/">via RSS</a> with Feedly!</span>
+              </section>
           {{/if}}
 
         </aside>
@@ -113,23 +124,22 @@
     {{!-- Links to Previous/Next posts --}}
     <div class="read-next">
         {{#next_post}}
-        <div class="column column--duo read-next-story {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
-            <a href="{{url}}">
-                <h5>{{title}}</h5>
-                <p>{{excerpt words="19"}}&hellip;</p>
-            </a>
-        </div>
+            <div class="column column--duo read-next-story {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
+                <a href="{{url}}">
+                    <h5>Next Post: {{title}}</h5>
+                    <p>{{excerpt words="19"}}&hellip;</p>
+                </a>
+            </div>
         {{/next_post}}
 
         {{#prev_post}}
-        <div class="column column--duo read-next-story prev {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
-            <a href="{{url}}">
-                <h5>{{title}}</h5>
-                <p>{{excerpt words="19"}}&hellip;</p>
-            </a>
-        </div>
+            <div class="column column--duo read-next-story prev {{#if image}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({{image}}){{else}}no-cover{{/if}}">
+                <a href="{{url}}">
+                    <h5>Last Post: {{title}}</h5>
+                    <p>{{excerpt words="19"}}&hellip;</p>
+                </a>
+            </div>
         {{/prev_post}}
     </div>
 </main>
-
 {{/post}}

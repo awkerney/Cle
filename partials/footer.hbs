@@ -5,10 +5,20 @@
         {{navigation}}
 			</ul>
 
-			<ul class="footer-socials">
-        <li><a class="img-replace facebook" href="{{facebook_url @blog.facebook}}">Facebook</a></li>
-				<li><a class="img-replace twitter" href="{{twitter_url @blog.twitter}}">Twitter</a></li>
-				<li><a class="img-replace rss" href="http://cloud.feedly.com/#subscription/feed/{{@blog.url}}/rss/">RSS</a></li>
-			</ul>
+		<ul class="footer-socials">
+	        <li>
+				<a class="img-replace facebook" href="{{facebook_url @blog.facebook}}">Facebook</a>
+			</li>
+			<li>
+				<a class="img-replace twitter" href="{{twitter_url @blog.twitter}}">Twitter</a>
+			</li>
+			{{#if @labs.subscribers}}
+				<li>
+					<a class="img-replace rss" href="http://cloud.feedly.com/#subscription/feed/{{@blog.url}}/rss/">
+						RSS
+					</a>
+				</li>
+			{{/if}}
+		</ul>
 	</div>
 </footer>
